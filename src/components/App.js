@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import Footer               from './Footer';
-import AddTodo              from '../containers/AddTodo';
-import VisibilityFilter     from '../containers/VisibleTodoList';
+
+// import ListPost   from './ListPost';
+import DetailPost from './DetailPost';
+import PostForm   from './PostForm';
 
 class App extends Component {
     render() {
         return (
             <div className="App">
-                <AddTodo/>
-                <VisibilityFilter/>
-                <Footer/>
+                <PostForm/>
+                <hr/>
+                {/*<ListPost/>*/}
+                <hr/>
+                <DetailPost/>
             </div>
         );
     }
