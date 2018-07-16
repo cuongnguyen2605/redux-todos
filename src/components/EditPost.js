@@ -2,14 +2,22 @@ import React, { Component }    from 'react';
 import PropTypes               from 'prop-types';
 import { connect }             from 'react-redux';
 import { Button, Form, Input } from 'semantic-ui-react';
-import { addPost }             from '../actions/postActions';
+import { updatePost }          from '../actions/postActions';
 
 
-class PostForm extends Component {
+class EditPost extends Component {
 
   state = {
-    title  : '',
-    content: '',
+    title  : this.props.post.title,
+    content: this.props.post.content
+  };
+
+  _updatePost = () => {
+    let post = {
+      title  : this.state.title,
+      content: this.state.content
+    };
+    this.props.updatePost(this.props.post.id, post);
   };
 
   handleChange = e => {
@@ -18,27 +26,10 @@ class PostForm extends Component {
     });
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    if (!this.state.title || !this.state.content) {
-      return;
-    }
-    let post = {
-      id     : new Date(),
-      title  : this.state.title,
-      content: this.state.content
-    };
-    this.props.addPost(post);
-    this.setState({
-      title  : '',
-      content: ''
-    });
-  };
-
   render() {
     const { title, content } = this.state;
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this._updatePost}>
         <Form.Field>
           <label>Title:</label>
           <Input fluid
@@ -55,23 +46,25 @@ class PostForm extends Component {
                  onChange={this.handleChange}
                  placeholder="Content"/>
         </Form.Field>
-        <Button type="submit">Submit</Button>
+        <Button type="submit">
+          Submit
+        </Button>
       </Form>
     );
   }
-
 }
 
 const mapDispatchToProps = dispatch => ({
-  addPost: post => dispatch(addPost(post))
+  updatePost: (id, post) => dispatch(updatePost(id, post))
 });
 
-PostForm.propTypes = {
-  addPost: PropTypes.func
+EditPost.propTypes = {
+  post      : PropTypes.object,
+  updatePost: PropTypes.func
 };
 
 
 export default connect(
   null,
   mapDispatchToProps
-)(PostForm);
+)(EditPost);
