@@ -1,16 +1,19 @@
-import React, { Component }    from 'react';
-import PropTypes               from 'prop-types';
-import { connect }             from 'react-redux';
-import { Button, Form, Input } from 'semantic-ui-react';
-import { addPost }             from '../actions/postActions';
+import React, { Component }              from 'react';
+import PropTypes                         from 'prop-types';
+import { connect }                       from 'react-redux';
+import { Button, Form, Input, TextArea } from 'semantic-ui-react';
+import { addPost }                       from '../actions/postActions';
 
 
 class PostForm extends Component {
 
-  state = {
-    title  : '',
-    content: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      title  : '',
+      content: ''
+    };
+  }
 
   handleChange = e => {
     this.setState({
@@ -20,13 +23,14 @@ class PostForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    if (!this.state.title || !this.state.content) {
+    let { title, content } = this.state;
+    if (!title || !content) {
       return;
     }
     let post = {
-      id     : new Date(),
-      title  : this.state.title,
-      content: this.state.content
+      id: Date(),
+      title,
+      content
     };
     this.props.addPost(post);
     this.setState({
@@ -49,11 +53,11 @@ class PostForm extends Component {
         </Form.Field>
         <Form.Field>
           <label>Content:</label>
-          <Input fluid
-                 name="content"
-                 value={content}
-                 onChange={this.handleChange}
-                 placeholder="Content"/>
+          <TextArea fluid
+                    name="content"
+                    value={content}
+                    onChange={this.handleChange}
+                    placeholder="Content"/>
         </Form.Field>
         <Button type="submit">Submit</Button>
       </Form>

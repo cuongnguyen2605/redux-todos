@@ -1,23 +1,31 @@
-import React, { Component }    from 'react';
-import PropTypes               from 'prop-types';
-import { connect }             from 'react-redux';
-import { Button, Form, Input } from 'semantic-ui-react';
-import { updatePost }          from '../actions/postActions';
+import React, { Component }              from 'react';
+import PropTypes                         from 'prop-types';
+import { connect }                       from 'react-redux';
+import { Button, Form, Input, TextArea } from 'semantic-ui-react';
+import { updatePost }                    from '../actions/postActions';
 
 
 class EditPost extends Component {
 
-  state = {
-    title  : this.props.post.title,
-    content: this.props.post.content
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      title  : this.props.post.title,
+      content: this.props.post.content
+    };
+  }
 
   _updatePost = () => {
+    let { id }             = this.props.post;
+    let { title, content } = this.state;
+    if (!title || !content) {
+      return;
+    }
     let post = {
-      title  : this.state.title,
-      content: this.state.content
+      title,
+      content
     };
-    this.props.updatePost(this.props.post.id, post);
+    this.props.updatePost(id, post);
   };
 
   handleChange = e => {
@@ -40,11 +48,11 @@ class EditPost extends Component {
         </Form.Field>
         <Form.Field>
           <label>Content:</label>
-          <Input fluid
-                 name="content"
-                 value={content}
-                 onChange={this.handleChange}
-                 placeholder="Content"/>
+          <TextArea fluid
+                    name="content"
+                    value={content}
+                    onChange={this.handleChange}
+                    placeholder="Content"/>
         </Form.Field>
         <Button type="submit">
           Submit
