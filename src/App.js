@@ -7,14 +7,18 @@ import ListPost             from './components/ListPost';
 class App extends Component {
   render() {
     return (
-      <Grid>
-        <Grid.Row>
-          <Container>
-            <PostForm/>
-            <ListPost/>
-          </Container>
-        </Grid.Row>
-      </Grid>
+      <Container>
+        <Grid>
+          <Grid.Row>
+            <Grid.Column width={8}>
+              <PostForm/>
+            </Grid.Column>
+            <Grid.Column width={8}>
+              <ListPost/>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
     );
   }
 }
