@@ -2,7 +2,7 @@ import React, { Component }              from 'react';
 import PropTypes                         from 'prop-types';
 import { connect }                       from 'react-redux';
 import { Button, Form, Input, TextArea } from 'semantic-ui-react';
-import { updatePost }                    from '../actions/postActions';
+import { updatePost, editPost }          from '../actions/post';
 
 
 class EditPost extends Component {
@@ -10,23 +10,23 @@ class EditPost extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id     : this.props.post.id,
       title  : this.props.post.title,
       content: this.props.post.content
     };
   }
 
   _updatePost = () => {
-    let { id }             = this.props.post;
-    let { title, content } = this.state;
-    if (!title || !content) {
-      return;
-    }
+    let { id, title, content } = this.state;
+    if (!title || !content) return;
     let post = {
       title,
       content
     };
     this.props.updatePost(id, post);
   };
+
+  _cancelEdit = () => this.props.editPost(this.state.id);
 
   handleChange = e => {
     this.setState({
@@ -35,26 +35,28 @@ class EditPost extends Component {
   };
 
   render() {
-    const { title, content } = this.state;
     return (
-      <Form onSubmit={this._updatePost}>
+      <Form>
         <Form.Field>
           <label>Title:</label>
-          <Input fluid
+          <Input fluid={true}
                  name="title"
-                 value={title}
+                 value={this.state.title}
                  onChange={this.handleChange}
                  placeholder="Title"/>
         </Form.Field>
         <Form.Field>
           <label>Content:</label>
-          <TextArea fluid
+          <TextArea fluid="true"
                     name="content"
-                    value={content}
+                    value={this.state.content}
                     onChange={this.handleChange}
                     placeholder="Content"/>
         </Form.Field>
-        <Button type="submit">
+        <Button type="submit" onClick={this._cancelEdit}>
+          Cancel
+        </Button>
+        <Button type="submit" onClick={this._updatePost}>
           Submit
         </Button>
       </Form>
@@ -63,7 +65,8 @@ class EditPost extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  updatePost: (id, post) => dispatch(updatePost(id, post))
+  updatePost: (id, post) => dispatch(updatePost(id, post)),
+  editPost  : id => dispatch(editPost(id))
 });
 
 EditPost.propTypes = {

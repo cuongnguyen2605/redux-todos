@@ -2,7 +2,7 @@ import React, { Component }              from 'react';
 import PropTypes                         from 'prop-types';
 import { connect }                       from 'react-redux';
 import { Button, Form, Input, TextArea } from 'semantic-ui-react';
-import { addPost }                       from '../actions/postActions';
+import { addPost }                       from '../actions/post';
 
 
 class PostForm extends Component {
@@ -24,9 +24,7 @@ class PostForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
     let { title, content } = this.state;
-    if (!title || !content) {
-      return;
-    }
+    if (!title || !content) return;
     let post = {
       id: Date(),
       title,
@@ -40,22 +38,21 @@ class PostForm extends Component {
   };
 
   render() {
-    const { title, content } = this.state;
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Field>
           <label>Title:</label>
-          <Input fluid
+          <Input fluid={true}
                  name="title"
-                 value={title}
+                 value={this.state.title}
                  onChange={this.handleChange}
                  placeholder="Title"/>
         </Form.Field>
         <Form.Field>
           <label>Content:</label>
-          <TextArea fluid
+          <TextArea fluid="true"
                     name="content"
-                    value={content}
+                    value={this.state.content}
                     onChange={this.handleChange}
                     placeholder="Content"/>
         </Form.Field>

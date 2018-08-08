@@ -6,15 +6,12 @@ import Post                 from './Post';
 
 class ListPost extends Component {
   render() {
-    const { posts } = this.props;
-    return posts.map((post, i) => (
-      <Post key={i} post={post}/>
-    ));
+    return this.props.posts.map((post, i) => <Post key={i} post={post}/>);
   }
 }
 
 const mapStateToProps = state => ({
-  posts: state.posts
+  posts: state.post
 });
 
 ListPost.propTypes = {

@@ -15,17 +15,12 @@ export default function (state = [], action) {
         editing: !post.editing
       } : post);
     case UPDATE_POST:
-      return state.map(post => {
-        if (post.id === action.id) {
-          return {
-            ...post,
-            title  : action.post.title,
-            content: action.post.content,
-            editing: !post.editing
-          }
-        }
-        return post;
-      });
+      return state.map(post => post.id === action.id ? {
+        ...post,
+        title  : action.post.title,
+        content: action.post.content,
+        editing: !post.editing
+      } : post);
     case DEL_POST:
       return state.filter(post => post.id !== action.id);
     default:
