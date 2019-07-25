@@ -24,6 +24,7 @@ class Post extends Component {
         <Button onClick={() => this._delPost(this.props.post.id)}>
           Remove
         </Button>
+        <hr/>
       </div>
   }
 
@@ -43,4 +44,5 @@ Post.propTypes = {
 export default connect(
   null,
   mapDispatchToProps
+  // { delPost, editPost }
 )(Post);

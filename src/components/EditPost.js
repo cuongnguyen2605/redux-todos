@@ -10,16 +10,16 @@ class EditPost extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id     : this.props.post.id,
-      title  : this.props.post.title,
-      content: this.props.post.content
+      id     : props.post.id,
+      title  : props.post.title,
+      content: props.post.content
     };
   }
 
   _updatePost = () => {
-    let { id, title, content } = this.state;
+    const { id, title, content } = this.state;
     if (!title || !content) return;
-    let post = {
+    const post = {
       title,
       content
     };
@@ -35,13 +35,14 @@ class EditPost extends Component {
   };
 
   render() {
+    const { title, content } = this.state;
     return (
       <Form>
         <Form.Field>
           <label>Title:</label>
           <Input fluid={true}
                  name="title"
-                 value={this.state.title}
+                 value={title}
                  onChange={this.handleChange}
                  placeholder="Title"/>
         </Form.Field>
@@ -49,7 +50,7 @@ class EditPost extends Component {
           <label>Content:</label>
           <TextArea fluid="true"
                     name="content"
-                    value={this.state.content}
+                    value={content}
                     onChange={this.handleChange}
                     placeholder="Content"/>
         </Form.Field>
@@ -59,6 +60,7 @@ class EditPost extends Component {
         <Button type="submit" onClick={this._updatePost}>
           Submit
         </Button>
+        <hr/>
       </Form>
     );
   }
@@ -78,4 +80,5 @@ EditPost.propTypes = {
 export default connect(
   null,
   mapDispatchToProps
+  // { updatePost, editPost }
 )(EditPost);

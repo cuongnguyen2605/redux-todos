@@ -23,9 +23,9 @@ class PostForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    let { title, content } = this.state;
+    const { title, content } = this.state;
     if (!title || !content) return;
-    let post = {
+    const post = {
       id: Date(),
       title,
       content
@@ -38,13 +38,14 @@ class PostForm extends Component {
   };
 
   render() {
+    const { title, content } = this.state;
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Field>
           <label>Title:</label>
           <Input fluid={true}
                  name="title"
-                 value={this.state.title}
+                 value={title}
                  onChange={this.handleChange}
                  placeholder="Title"/>
         </Form.Field>
@@ -52,7 +53,7 @@ class PostForm extends Component {
           <label>Content:</label>
           <TextArea fluid="true"
                     name="content"
-                    value={this.state.content}
+                    value={content}
                     onChange={this.handleChange}
                     placeholder="Content"/>
         </Form.Field>
@@ -75,4 +76,5 @@ PostForm.propTypes = {
 export default connect(
   null,
   mapDispatchToProps
+  // { addPost }
 )(PostForm);
