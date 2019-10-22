@@ -1,8 +1,8 @@
-import React, { Component }              from 'react';
-import PropTypes                         from 'prop-types';
-import { connect }                       from 'react-redux';
-import { Button, Form, Input, TextArea } from 'semantic-ui-react';
-import { updatePost, editPost }          from '../actions/post';
+import React, { Component }                    from 'react';
+import PropTypes                               from 'prop-types';
+import { connect }                             from 'react-redux';
+import { Button, Form, Input, TextArea, Icon } from 'semantic-ui-react';
+import { updatePost, editPost }                from '../actions/post';
 
 
 class EditPost extends Component {
@@ -10,9 +10,9 @@ class EditPost extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id     : props.post.id,
-      title  : props.post.title,
-      content: props.post.content
+      id     : this.props.post.id,
+      title  : this.props.post.title,
+      content: this.props.post.content
     };
   }
 
@@ -38,6 +38,7 @@ class EditPost extends Component {
     const { title, content } = this.state;
     return (
       <Form>
+
         <Form.Field>
           <label>Title:</label>
           <Input fluid={true}
@@ -46,6 +47,7 @@ class EditPost extends Component {
                  onChange={this.handleChange}
                  placeholder="Title"/>
         </Form.Field>
+
         <Form.Field>
           <label>Content:</label>
           <TextArea fluid="true"
@@ -54,13 +56,17 @@ class EditPost extends Component {
                     onChange={this.handleChange}
                     placeholder="Content"/>
         </Form.Field>
-        <Button type="submit" onClick={this._cancelEdit}>
-          Cancel
+
+        <Button negative type="submit" onClick={this._cancelEdit}>
+          <Icon name="cancel"/>Cancel
         </Button>
-        <Button type="submit" onClick={this._updatePost}>
-          Submit
+
+        <Button primary type="submit" onClick={this._updatePost}>
+          <Icon name="check"/>Submit
         </Button>
+
         <hr/>
+
       </Form>
     );
   }

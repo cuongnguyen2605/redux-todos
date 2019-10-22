@@ -1,8 +1,8 @@
-import React, { Component }              from 'react';
-import PropTypes                         from 'prop-types';
-import { connect }                       from 'react-redux';
-import { Button, Form, Input, TextArea } from 'semantic-ui-react';
-import { addPost }                       from '../actions/post';
+import React, { Component }                    from 'react';
+import PropTypes                               from 'prop-types';
+import { connect }                             from 'react-redux';
+import { Button, Form, Input, TextArea, Icon } from 'semantic-ui-react';
+import { addPost }                             from '../actions/post';
 
 
 class PostForm extends Component {
@@ -41,6 +41,7 @@ class PostForm extends Component {
     const { title, content } = this.state;
     return (
       <Form onSubmit={this.handleSubmit}>
+
         <Form.Field>
           <label>Title:</label>
           <Input fluid={true}
@@ -49,6 +50,7 @@ class PostForm extends Component {
                  onChange={this.handleChange}
                  placeholder="Title"/>
         </Form.Field>
+
         <Form.Field>
           <label>Content:</label>
           <TextArea fluid="true"
@@ -57,7 +59,11 @@ class PostForm extends Component {
                     onChange={this.handleChange}
                     placeholder="Content"/>
         </Form.Field>
-        <Button type="submit">Submit</Button>
+
+        <Button primary type="submit">
+          <Icon name="check"/>Submit
+        </Button>
+
       </Form>
     );
   }

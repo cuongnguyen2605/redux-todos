@@ -1,4 +1,5 @@
 import {
+  GET_POST,
   ADD_POST,
   EDIT_POST,
   UPDATE_POST,
@@ -7,6 +8,9 @@ import {
 
 export default function (state = [], action) {
   switch (action.type) {
+    // 
+    case GET_POST:
+      return action.response;
     // Handle Add Post
     case ADD_POST:
       return [...state, action.post];

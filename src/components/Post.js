@@ -1,7 +1,7 @@
 import React, { Component }  from 'react';
 import PropTypes             from 'prop-types';
 import { connect }           from 'react-redux';
-import { Button }            from 'semantic-ui-react';
+import { Button, Icon }      from 'semantic-ui-react';
 import { delPost, editPost } from '../actions/post';
 import EditPost              from './EditPost';
 
@@ -12,20 +12,26 @@ class Post extends Component {
 
   _delPost = id => this.props.delPost(id);
 
+  renderPost = post => (
+    <div>
+      <h2>{post.title}</h2>
+      <p>{post.content}</p>
+
+      <Button primary onClick={() => this._editPost(post.id)}>
+        <Icon name="edit"/>Edit
+      </Button>
+
+      <Button negative onClick={() => this._delPost(post.id)}>
+        <Icon name="delete"/>Remove
+      </Button>
+
+      <hr/>
+    </div>
+  )
+
   render() {
-    return this.props.post.editing ?
-      <EditPost post={this.props.post}/> :
-      <div>
-        <h2>{this.props.post.title}</h2>
-        <p>{this.props.post.content}</p>
-        <Button onClick={() => this._editPost(this.props.post.id)}>
-          Edit
-        </Button>
-        <Button onClick={() => this._delPost(this.props.post.id)}>
-          Remove
-        </Button>
-        <hr/>
-      </div>
+    const { post } = this.props;
+    return post.editing ? <EditPost post={post}/> : this.renderPost(post);
   }
 
 }
