@@ -27,7 +27,7 @@ class Post extends Component {
 
       <hr/>
     </div>
-  )
+  );
 
   render() {
     const { post } = this.props;
@@ -36,10 +36,10 @@ class Post extends Component {
 
 }
 
-const mapDispatchToProps = dispatch => ({
-  delPost : id => dispatch(delPost(id)),
-  editPost: id => dispatch(editPost(id))
-});
+// const mapDispatchToProps = dispatch => ({
+//   delPost : id => dispatch(delPost(id)),
+//   editPost: id => dispatch(editPost(id))
+// });
 
 Post.propTypes = {
   editPost: PropTypes.func,
@@ -49,6 +49,6 @@ Post.propTypes = {
 
 export default connect(
   null,
-  mapDispatchToProps
-  // { delPost, editPost }
+  // mapDispatchToProps
+  { delPost, editPost }
 )(Post);

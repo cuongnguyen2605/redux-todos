@@ -8,9 +8,9 @@ import {
 
 export default function (state = [], action) {
   switch (action.type) {
-    // 
+    // Handle Get Post
     case GET_POST:
-      return action.response;
+      return state = action.data;
     // Handle Add Post
     case ADD_POST:
       return [...state, action.post];

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
   GET_POST,
   ADD_POST,
@@ -27,13 +28,15 @@ import {
 //   id
 // });
 
+
 export const getPost = () => {
   return async dispatch => {
     try {
-      const response = [];
+      const response = await axios.get(`https://jsonplaceholder.typicode.com/posts`);
+      const { data } = response;
       dispatch({
         type: GET_POST,
-        response
+        data
       });
     } catch (error) {
       console.log(error);
@@ -41,23 +44,53 @@ export const getPost = () => {
   }
 }
 
-export const addPost = post => dispatch => dispatch({
-  type: ADD_POST,
-  post
-});
+export const addPost = post => {
+  return async dispatch => {
+    try {
+      const response = await axios.post(`https://jsonplaceholder.typicode.com/posts`);
+      console.log(response);
+      dispatch({
+        type: ADD_POST,
+        post
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
 
 export const editPost = id => dispatch => dispatch({
   type: EDIT_POST,
   id
 });
 
-export const updatePost = (id, post) => dispatch => dispatch({
-  type: UPDATE_POST,
-  id,
-  post
-});
+export const updatePost = (id, post) => {
+  return async dispatch => {
+    try {
+      const response = await axios.put(`https://jsonplaceholder.typicode.com/posts`);
+      console.log(response);
+      dispatch({
+        type: UPDATE_POST,
+        id,
+        post
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
 
-export const delPost = id => dispatch => dispatch({
-  type: DEL_POST,
-  id
-});
+export const delPost = id => {
+  return async dispatch => {
+    try {
+      const response = await axios.delete(`https://jsonplaceholder.typicode.com/posts`);
+      console.log(response);
+      dispatch({
+        type: DEL_POST,
+        id
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
