@@ -72,19 +72,20 @@ class EditPost extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  updatePost: (id, post) => dispatch(updatePost(id, post)),
-  editPost  : id => dispatch(editPost(id))
-});
+// const mapDispatchToProps = dispatch => ({
+//   updatePost: (id, post) => dispatch(updatePost(id, post)),
+//   editPost  : id => dispatch(editPost(id))
+// });
 
 EditPost.propTypes = {
   post      : PropTypes.object,
-  updatePost: PropTypes.func
+  updatePost: PropTypes.func,
+  editPost  : PropTypes.func,
 };
 
 
 export default connect(
   null,
-  mapDispatchToProps
-  // { updatePost, editPost }
+  // mapDispatchToProps
+  { updatePost, editPost }
 )(EditPost);

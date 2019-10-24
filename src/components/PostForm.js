@@ -70,9 +70,9 @@ class PostForm extends Component {
 
 }
 
-const mapDispatchToProps = dispatch => ({
-  addPost: post => dispatch(addPost(post))
-});
+// const mapDispatchToProps = dispatch => ({
+//   addPost: post => dispatch(addPost(post))
+// });
 
 PostForm.propTypes = {
   addPost: PropTypes.func
@@ -81,6 +81,6 @@ PostForm.propTypes = {
 
 export default connect(
   null,
-  mapDispatchToProps
-  // { addPost }
+  // mapDispatchToProps
+  { addPost }
 )(PostForm);

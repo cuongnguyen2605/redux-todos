@@ -21,7 +21,7 @@ const mapStateToProps = state => ({
 });
 
 ListPost.propTypes = {
-  getPost: PropTypes.func.isRequired,
+  getPost: PropTypes.func,
   posts: PropTypes.array
 };
 
