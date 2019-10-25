@@ -10,10 +10,16 @@ class EditPost extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id     : this.props.post.id,
+      id     : this.props.post._id,
       title  : this.props.post.title,
       content: this.props.post.content
     };
+  }
+
+  static propTypes = {
+    post      : PropTypes.object.isRequired,
+    // editPost  : PropTypes.func.isRequired,
+    updatePost: PropTypes.func.isRequired,
   }
 
   _updatePost = () => {
@@ -70,18 +76,13 @@ class EditPost extends Component {
       </Form>
     );
   }
+
 }
 
 // const mapDispatchToProps = dispatch => ({
 //   updatePost: (id, post) => dispatch(updatePost(id, post)),
 //   editPost  : id => dispatch(editPost(id))
 // });
-
-EditPost.propTypes = {
-  post      : PropTypes.object,
-  updatePost: PropTypes.func,
-  editPost  : PropTypes.func,
-};
 
 
 export default connect(

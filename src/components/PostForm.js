@@ -15,6 +15,10 @@ class PostForm extends Component {
     };
   }
 
+  static propTypes = {
+    addPost: PropTypes.func.isRequired,
+  }
+
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -26,7 +30,6 @@ class PostForm extends Component {
     const { title, content } = this.state;
     if (!title || !content) return;
     const post = {
-      id: Date(),
       title,
       content
     };
@@ -73,10 +76,6 @@ class PostForm extends Component {
 // const mapDispatchToProps = dispatch => ({
 //   addPost: post => dispatch(addPost(post))
 // });
-
-PostForm.propTypes = {
-  addPost: PropTypes.func
-};
 
 
 export default connect(

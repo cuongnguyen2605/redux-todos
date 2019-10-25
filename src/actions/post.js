@@ -1,11 +1,5 @@
 import axios from 'axios';
-import {
-  GET_POST,
-  ADD_POST,
-  EDIT_POST,
-  UPDATE_POST,
-  DEL_POST
-} from '../constants/ActionTypes';
+import * as types from '../constants/ActionTypes';
 
 // export const addPost = post => ({
 //   type: ADD_POST,
@@ -32,11 +26,10 @@ import {
 export const getPost = () => {
   return async dispatch => {
     try {
-      const response = await axios.get(`https://jsonplaceholder.typicode.com/posts`);
-      const { data } = response;
+      const response = await axios.get(`http://localhost:8000/api/post`);
       dispatch({
-        type: GET_POST,
-        data
+        type: types.GET_POST,
+        posts: response.data
       });
     } catch (error) {
       console.log(error);
@@ -47,11 +40,10 @@ export const getPost = () => {
 export const addPost = post => {
   return async dispatch => {
     try {
-      const response = await axios.post(`https://jsonplaceholder.typicode.com/posts`);
-      console.log(response);
+      const response = await axios.post(`http://localhost:8000/api/post`, post);
       dispatch({
-        type: ADD_POST,
-        post
+        type: types.ADD_POST,
+        post: response.data
       });
     } catch (error) {
       console.log(error);
@@ -60,19 +52,18 @@ export const addPost = post => {
 };
 
 export const editPost = id => dispatch => dispatch({
-  type: EDIT_POST,
+  type: types.EDIT_POST,
   id
 });
 
 export const updatePost = (id, post) => {
   return async dispatch => {
     try {
-      const response = await axios.put(`https://jsonplaceholder.typicode.com/posts`);
-      console.log(response);
+      const response = await axios.put(`http://localhost:8000/api/post/${id}`, post);
       dispatch({
-        type: UPDATE_POST,
+        type: types.UPDATE_POST,
         id,
-        post
+        post: response.data
       });
     } catch (error) {
       console.log(error);
@@ -83,11 +74,10 @@ export const updatePost = (id, post) => {
 export const delPost = id => {
   return async dispatch => {
     try {
-      const response = await axios.delete(`https://jsonplaceholder.typicode.com/posts`);
-      console.log(response);
+      const response = await axios.delete(`http://localhost:8000/api/post/${id}`);
       dispatch({
-        type: DEL_POST,
-        id
+        type: types.DEL_POST,
+        id: response.data._id
       });
     } catch (error) {
       console.log(error);

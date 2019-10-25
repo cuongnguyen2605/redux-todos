@@ -8,6 +8,12 @@ import EditPost              from './EditPost';
 
 class Post extends Component {
 
+  static propTypes = {
+    post    : PropTypes.object.isRequired,
+    editPost: PropTypes.func.isRequired,
+    delPost : PropTypes.func.isRequired,
+  }
+
   _editPost = id => this.props.editPost(id);
 
   _delPost = id => this.props.delPost(id);
@@ -17,11 +23,11 @@ class Post extends Component {
       <h2>{post.title}</h2>
       <p>{post.content}</p>
 
-      <Button primary onClick={() => this._editPost(post.id)}>
+      <Button primary onClick={() => this._editPost(post._id)}>
         <Icon name="edit"/>Edit
       </Button>
 
-      <Button negative onClick={() => this._delPost(post.id)}>
+      <Button negative onClick={() => this._delPost(post._id)}>
         <Icon name="delete"/>Remove
       </Button>
 
@@ -33,18 +39,12 @@ class Post extends Component {
     const { post } = this.props;
     return post.editing ? <EditPost post={post}/> : this.renderPost(post);
   }
-
 }
 
 // const mapDispatchToProps = dispatch => ({
 //   delPost : id => dispatch(delPost(id)),
 //   editPost: id => dispatch(editPost(id))
 // });
-
-Post.propTypes = {
-  editPost: PropTypes.func,
-  delPost : PropTypes.func
-};
 
 
 export default connect(

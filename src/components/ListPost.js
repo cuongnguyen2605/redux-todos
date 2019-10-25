@@ -6,6 +6,12 @@ import Post                 from './Post';
 
 
 class ListPost extends Component {
+
+  static propTypes = {
+    posts  : PropTypes.array.isRequired,
+    getPost: PropTypes.func.isRequired,
+  }
+
   componentDidMount() {
     this.props.getPost();
   }
@@ -14,16 +20,12 @@ class ListPost extends Component {
     const { posts } = this.props;
     return posts.map((post, i) => <Post key={i} post={post}/>);
   }
+
 }
 
 const mapStateToProps = state => ({
   posts: state.post
 });
-
-ListPost.propTypes = {
-  getPost: PropTypes.func,
-  posts: PropTypes.array
-};
 
 
 export default connect(
