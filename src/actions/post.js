@@ -1,4 +1,5 @@
 import axios from 'axios';
+import config from '../config'
 import * as types from '../constants/ActionTypes';
 
 // export const addPost = post => ({
@@ -26,7 +27,7 @@ import * as types from '../constants/ActionTypes';
 export const getPost = () => {
   return async dispatch => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/post`);
+      const response = await axios.get(`${config.api}/post`);
       dispatch({
         type: types.GET_POST,
         posts: response.data
@@ -40,7 +41,7 @@ export const getPost = () => {
 export const addPost = post => {
   return async dispatch => {
     try {
-      const response = await axios.post(`http://localhost:8000/api/post`, post);
+      const response = await axios.post(`${config.api}/post`, post);
       dispatch({
         type: types.ADD_POST,
         post: response.data
@@ -59,7 +60,7 @@ export const editPost = id => dispatch => dispatch({
 export const updatePost = (id, post) => {
   return async dispatch => {
     try {
-      const response = await axios.put(`http://localhost:8000/api/post/${id}`, post);
+      const response = await axios.put(`${config.api}/post/${id}`, post);
       dispatch({
         type: types.UPDATE_POST,
         id,
@@ -74,7 +75,7 @@ export const updatePost = (id, post) => {
 export const delPost = id => {
   return async dispatch => {
     try {
-      const response = await axios.delete(`http://localhost:8000/api/post/${id}`);
+      const response = await axios.delete(`${config.api}/post/${id}`);
       dispatch({
         type: types.DEL_POST,
         id: response.data._id
