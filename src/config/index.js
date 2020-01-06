@@ -1,3 +1,3 @@
 export default {
-  api: 'http://localhost:3001/v1'
+  api: 'http://35.221.225.55:3001/v1'
 }

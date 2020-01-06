@@ -18,7 +18,7 @@ class ListPost extends Component {
 
   render() {
     const { posts } = this.props;
-    return posts.map((post, i) => <Post key={i} post={post}/>);
+    return posts && posts.length > 0 && posts.map((post, i) => <Post key={i} post={post}/>);
   }
 
 }
